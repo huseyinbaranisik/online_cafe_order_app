@@ -5,59 +5,47 @@
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
   <img src="https://img.shields.io/badge/PyQt5-41CD52?style=for-the-badge&logo=qt&logoColor=white" />
   <img src="https://img.shields.io/badge/SQLite3-003B57?style=for-the-badge&logo=sqlite&logoColor=white" />
-  <img src="https://img.shields.io/badge/UI_Design-Qt_Designer-blue?style=for-the-badge&logo=qt" />
+  <img src="https://img.shields.io/badge/Arayüz-Qt_Designer-blue?style=for-the-badge&logo=qt" />
 </p>
 
 ---
 
-# 🚀 PROJECT OVERVIEW (EN)
+### 📝 PROJE HAKKINDA
+Bu çalışma, bir pastane işletmesinin uçtan uca satış ve personel yönetimini dijitalleştirmek amacıyla geliştirilmiş bir masaüstü otomasyonudur. Uygulama, müşteriler için kullanıcı dostu bir sipariş arayüzü sunarken, yöneticiler için personel performansı ve finansal verilerin takibini sağlayan çift katmanlı bir mimariye sahiptir.
 
-A comprehensive **Sales and Management Automation** application developed for a bakery. The system offers a dual-layered structure where customers can browse and order products, while administrators manage staff records and financial metrics.
-
-### 🌟 Key Features
-* **🔐 Secure Access:** User/Staff registration and login with **Regex** email validation.
-* **🛒 Advanced Cart:** Real-time price calculation, item increment/decrement, and QR integration.
-* **💼 Admin Dashboard:** Secure management panel for tracking employee salaries and bonuses.
-* **📈 Automatic Bonus:** Intelligent system that transfers **5% of each sale** to the respective staff as a bonus.
-* **🍰 Categorized Catalog:** Specialized sections for Beverages, Cookies, Breakfast, Sweets, and Ice Cream.
-
----
-
-# 🚀 PROJE DETAYLARI (TR)
-
-Bir pastahane işletmesi için geliştirilmiş, kapsamlı bir **Satış ve Yönetim Otomasyonu** uygulamasıdır. Kullanıcıların ürün sipariş edebileceği, yöneticilerin ise personel ve prim süreçlerini takip edebileceği modüler bir yapı sunar.
+Veritabanı yönetimi ve kullanıcı arayüzü entegrasyonu odaklı geliştirilen bu proje, küçük ölçekli işletmelerin operasyonel ihtiyaçlarını karşılamayı hedefler.
 
 ### 🌟 Temel Özellikler
-* **🛡️ Kullanıcı ve Güvenlik:** **Regex** doğrulamalı kayıt sistemi ve şifre gizleme fonksiyonlu güvenli giriş.
-* **🛒 Satış ve Market:** Kategorize edilmiş ürünler, anlık fiyat hesaplamalı sepet ve QR kod entegrasyonu.
-* **💼 Yönetim Paneli:** Çalışanların maaş ve performans verilerini görüntüleme imkanı.
-* **📈 Akıllı Prim Sistemi:** Yapılan her satıştan sepet tutarının **%5'i oranında** personele otomatik prim aktarımı.
-* **🍰 Geniş Ürün Yelpazesi:** İçecekler, kurabiyeler, kahvaltılıklar, tatlılar ve dondurmalar için özel kategoriler.
+* **🛡️ Güvenli Erişim:** Regex doğrulamalı kayıt sistemi ve şifreleme fonksiyonları içeren giriş paneli.
+* **🛒 Dinamik Sepet:** Kategorize edilmiş ürünler (Tatlı, İçecek, Kahvaltı vb.), anlık fiyat hesaplama ve QR kod desteği.
+* **💼 Yönetici Paneli:** Personel maaş verilerinin, satış adetlerinin ve primlerin izlenebildiği merkezi kontrol alanı.
+* **📈 Otomatik Prim Hesaplama:** Her başarılı satıştan elde edilen tutarın %5'ini ilgili personele prim olarak yansıtan akıllı sistem.
+* **📊 Veri Yönetimi:** SQLite3 altyapısı ile kullanıcı, personel ve sipariş verilerinin kalıcı olarak saklanması.
 
 ---
 
-# 🛠️ TECH STACK & ARCHITECTURE
+### 🛠️ TEKNOLOJİ YIĞINI
 
-| Bileşen / Component | Teknoloji / Technology | Kullanım Amacı / Purpose |
+| Bileşen | Teknoloji | Kullanım Amacı |
 | :--- | :--- | :--- |
-| **Language** | Python 3.x | Core Application Logic |
-| **Interface** | PyQt5 & Qt Designer | User Interface & UX Design |
-| **Database** | SQLite3 | User, Admin & Staff Records |
-| **Validation** | Regex (re) | Email Format Verification |
+| **Programlama Dili** | Python 3.x | Uygulama Mantığı ve Veritabanı İşlemleri |
+| **Arayüz Tasarımı** | PyQt5 & Qt Designer | UI/UX Tasarımı ve Bileşen Yönetimi |
+| **Veritabanı** | SQLite3 | Kullanıcı, Yönetici ve Personel Kayıtları |
+| **Doğrulama** | Regex (re) | E-posta ve Veri Formatı Doğrulaması |
 
 ---
 
-# 📂 PROJECT STRUCTURE
+### 📂 PROJE YAPISI
 
-* `main.py`: Uygulamanın ana mantığı ve veritabanı CRUD işlemleri.
-* `py_proje_v5.py`: Qt Designer üzerinden üretilen arayüz kodları.
-* `db_kullanici.db`: Tüm kullanıcı ve personel verilerinin tutulduğu SQLite veritabanı.
-* `icon/`: Uygulamada kullanılan görsel materyaller ve ikonlar.
+* `main.py`: Uygulamanın çekirdek mantığı ve veritabanı CRUD işlemleri.
+* `ui_interface.py`: Qt Designer üzerinden üretilen arayüz kodları.
+* `database.db`: Kullanıcı ve personel verilerini içeren SQLite veritabanı.
+* `assets/`: Uygulama içerisinde kullanılan görsel materyaller ve ikonlar.
 
 ---
 
-# 🚀 INSTALLATION & USAGE
+### 🚀 KURULUM VE BAŞLATMA
 
-1. **Gereksinimleri Yükleyin / Install Requirements:**
+1. **Gerekli kütüphaneleri yükleyin:**
    ```bash
    pip install PyQt5
