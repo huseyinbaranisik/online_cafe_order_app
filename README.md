@@ -67,71 +67,23 @@ The window is a `QStackedWidget` with eight pages, designed in Qt Designer (`ui_
 `py_proje_v5.py` by `uitopy.py`. All behaviour is in `main.py` (`MainWindow`), and all data is in one SQLite file,
 `db_kullanici.db`.
 
-```mermaid
-flowchart LR
-    W["0 · welcome"] -->|Giriş| L["1 · log in"]
-    W -->|Hesap Oluştur| S["2 · sign up"]
-    W -->|Hızlı Giriş| M["3 · shop"]
-    W -->|Yönetici Girişi| A["7 · admin log in"]
-    L -->|user + password match| M
-    S -->|account created| W
-    M -->|✓| C["5 · cart"]
-    C -->|✓: add 5 % bonus| Q["4 · payment QR"]
-    Q -->|back| M
-    A -->|admin match| T["6 · staff bonuses"]
-```
+The welcome page leads to log in, sign up, the shop (directly, with "Hızlı Giriş") or the admin login. A
+successful login opens the shop; ✓ in the shop opens the cart, and ✓ in the cart adds the bonus and shows the
+payment QR page. A successful admin login opens the staff table.
 
-What happens when a cart is confirmed:
+**Confirming a cart.** The app adds up price × quantity, takes `int(total × 0.05)` as the bonus, reads the
+logged-in user's `prim` from `calisan_bilgi`, writes back the new value, shows "Sepet onaylandı. N₺ prim
+eklendi." and moves to the QR page.
 
-```mermaid
-sequenceDiagram
-    participant U as Staff member (logged in)
-    participant App as MainWindow
-    participant DB as db_kullanici.db
-    U->>App: ✓ on the cart page
-    App->>App: total = Σ price × quantity, bonus = int(total × 0.05)
-    App->>DB: SELECT prim FROM calisan_bilgi WHERE isim = user
-    App->>DB: UPDATE calisan_bilgi SET prim = prim + bonus
-    App-->>U: "Sepet onaylandı. N₺ prim eklendi."
-    App->>App: show the payment QR page
-```
+**The database** has five tables:
 
-The database:
-
-```mermaid
-erDiagram
-    kullanicilar {
-        int id PK
-        text kullanici_adi
-        text sifre
-        text telefon
-        text eposta
-    }
-    calisan_bilgi {
-        text isim
-        text telefon
-        int maas
-        int prim
-    }
-    yonetici_bilgi {
-        int yonetici_id PK
-        text yonetici_adi
-        text yonetici_sifre
-        text yonetici_eposta
-        text yonetici_telefon
-    }
-    urunler {
-        int id PK
-        text ad
-        int fiyat
-        text kategori
-    }
-    kategori {
-        int id PK
-        text kategori_adi
-    }
-    kullanicilar ||--|| calisan_bilgi : "same user name"
-```
+| Table | Columns |
+| :--- | :--- |
+| `kullanicilar` | `id`, `kullanici_adi`, `sifre`, `telefon`, `eposta` |
+| `calisan_bilgi` | `isim`, `telefon`, `maas`, `prim` (one row per account, matched by user name) |
+| `yonetici_bilgi` | `yonetici_id`, `yonetici_adi`, `yonetici_sifre`, `yonetici_eposta`, `yonetici_telefon` |
+| `urunler` | `id`, `ad`, `fiyat`, `kategori` |
+| `kategori` | `id`, `kategori_adi` |
 
 <br>
 
@@ -216,8 +168,19 @@ ayse'nin primi 120'den 127'ye çıkmıştır. Uygulama pencere açmadan çizildi
 
 Pencere, Qt Designer'da tasarlanmış (`ui_proje.ui`) ve `uitopy.py` ile `py_proje_v5.py`'ye derlenmiş sekiz sayfalı bir
 `QStackedWidget`'tır. Bütün davranış `main.py`'de (`MainWindow`), bütün veri tek bir SQLite dosyasında
-(`db_kullanici.db`). Sayfalar arası geçiş, sepet onayında olanlar ve veritabanı yapısı yukarıdaki üç Mermaid
-diyagramında gösteriliyor.
+(`db_kullanici.db`).
+
+Karşılama sayfasından giriş, kayıt, market ("Hızlı Giriş" ile doğrudan) ya da yönetici girişine gidilir. Başarılı
+giriş marketi açar; marketteki ✓ sepeti, sepetteki ✓ ise primi ekleyip QR ödeme sayfasını açar. Başarılı yönetici
+girişi çalışan tablosunu açar.
+
+**Sepet onayı.** Uygulama fiyat × adetleri toplar, primi `int(toplam × 0.05)` olarak hesaplar, giriş yapmış
+kullanıcının `calisan_bilgi` tablosundaki `prim` değerini okur, yeni değeri yazar, "Sepet onaylandı. N₺ prim
+eklendi." mesajını gösterir ve QR sayfasına geçer.
+
+**Veritabanı** beş tablodan oluşur: `kullanicilar` (kullanıcı adı, şifre, telefon, e-posta), `calisan_bilgi`
+(isim, telefon, maaş, prim; her hesap için bir satır, kullanıcı adıyla eşleşir), `yonetici_bilgi`, `urunler`
+(ad, fiyat, kategori) ve `kategori`.
 
 ### Çalıştırma
 
